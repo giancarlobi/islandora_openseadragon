@@ -32,6 +32,14 @@ function islandora_openseadragon_menu() {
       'file' => 'includes/download.clip.inc',
       'load arguments' => array(2),
     ),
+    'islandora_openseadragon_iframe/%' => array(
+       'page callback' => 'islandora_openseadragon_iframe',
+       'page arguments' => array(1),
+       'type' => MENU_CALLBACK,
+       'access callback' => 'user_access',
+       'access arguments' => array(ISLANDORA_VIEW_OBJECTS),
+       'file' => 'includes/iframe.inc',
+    ),
   );
 }
 
