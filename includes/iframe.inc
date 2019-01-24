@@ -11,7 +11,6 @@ function islandora_openseadragon_iframe($object_id) {
         module_load_include('inc', 'islandora_openseadragon', 'includes/utilities');
         $TS = islandora_openseadragon_tile_source($object_id, 'JP2', '');
         $settings = islandora_openseadragon_get_settings($filter_null = TRUE);
-
         echo '<!DOCTYPE html>
                 <html>
                 <head>
@@ -39,15 +38,16 @@ function islandora_openseadragon_iframe($object_id) {
                 echo('navigationControlAnchor: 2,');
                 echo('sequenceMode: false,');
                 echo('preserveViewport: true,');
-                echo('defaultZoomLevel: 0,');
                 echo('constrainDuringPan: false,');
+                echo('defaultZoomLevel: 0,');
+                echo('maxZoomLevel: "'.$settings['maxZoomLevel'].'",');
+                echo('maxZoomPixelRatio: "'.$settings['maxZoomPixelRatio'].'",');
+                echo('minZoomImageRatio: "'.$settings['minZoomImageRatio'].'",');
                 echo('visibilityRatio: 1,');
-                echo('minZoomImageRatio: 0.9,');
                 echo('tileSources: "'.$TS.'",');
         echo('});');
         echo('</script>
                 </body>
                 </html>');
-
         drupal_exit();
 }
