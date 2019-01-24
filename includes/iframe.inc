@@ -11,12 +11,23 @@ function islandora_openseadragon_iframe($object_id) {
         module_load_include('inc', 'islandora_openseadragon', 'includes/utilities');
         $TS = islandora_openseadragon_tile_source($object_id, 'JP2', '');
         $settings = islandora_openseadragon_get_settings($filter_null = TRUE);
-        echo('<div id=osdi allowfullscreen style="height: 100%; width: 100%; display: inline-block;"></div>');
-        echo('<script src="/sites/all/libraries/openseadragon/openseadragon.js"></script>');
-        echo('<script type="text/javascript">');
+
+        echo '<!DOCTYPE html>
+                <html>
+                <head>
+                <title>Zoom</title>';
+        echo('<script type="text/javascript" src="/sites/all/libraries/openseadragon/openseadragon.js"></script>');
+        echo '<meta name="viewport" content="initial-scale=1.0">
+                <meta charset="utf-8">
+                <style>
+                html, body { height: 100%; margin: 0; padding: 0; background-color: white;}
+                </style>
+                </head>
+                <body>
+                <div id="osdi" allowfullscreen style="height: 100%"> </div>
+                <script type="text/javascript">';
         echo('var viewer = OpenSeadragon({');
                 echo('element: document.getElementById("osdi"),');
-//              echo('prefixUrl: "/sites/all/libraries/openseadragon/images/",');
                 echo('prefixUrl: "'.$settings['prefixUrl'].'",');
                 echo('homeFillsViewer: false,');
                 echo('showZoomControl: true,');
@@ -34,6 +45,9 @@ function islandora_openseadragon_iframe($object_id) {
                 echo('minZoomImageRatio: 0.9,');
                 echo('tileSources: "'.$TS.'",');
         echo('});');
-        echo('</script>');
+        echo('</script>
+                </body>
+                </html>');
+
         drupal_exit();
 }
